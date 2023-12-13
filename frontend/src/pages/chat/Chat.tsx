@@ -140,7 +140,6 @@ const Chat = () => {
             date: new Date().toISOString(),
         };
         
-        console.log("IN makeApiRequestWithoutCosmosDB:");
         
         let conversation: Conversation | null | undefined;
         if(!conversationId){
