@@ -131,11 +131,12 @@ const Chat = () => {
         setShowLoadingMessage(true);
         const abortController = new AbortController();
         abortFuncs.current.unshift(abortController);
-
+        const messagePrefix = 'You are genomics researcher responsible for answering genomics questions. '
+        const messagePostfix = ' Provide your reply in JSON format and then also provide a summarized format. Characteristics = symptoms. '
         const userMessage: ChatMessage = {
             id: uuid(),
             role: "user",
-            content: question,
+            content: messagePrefix+question+messagePostfix,
             date: new Date().toISOString(),
         };
 
