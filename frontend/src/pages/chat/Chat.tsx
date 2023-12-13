@@ -131,22 +131,27 @@ const Chat = () => {
         setShowLoadingMessage(true);
         const abortController = new AbortController();
         abortFuncs.current.unshift(abortController);
-        const messagePrefix = 'You are genomics researcher responsible for answering genomics questions. '
-        const messagePostfix = ' Provide your reply in JSON format and then also provide a summarized format. Characteristics = symptoms. '
+        const systemMessage = 'You are genomics researcher responsible for answering genomics questions. Provide your reply in JSON format and then also provide a summarized format. Characteristics = symptoms.'
         const userMessage: ChatMessage = {
             id: uuid(),
             role: "user",
-            content: messagePrefix+question+messagePostfix,
+            content: question,
             date: new Date().toISOString(),
         };
         
+        const systemMessage: ChatMessage = {
+            id: uuid(),
+            role: "system",
+            content: systemMessage,
+            date: new Date().toISOString(),
+        };
         
         let conversation: Conversation | null | undefined;
         if(!conversationId){
             conversation = {
                 id: conversationId ?? uuid(),
                 title: question,
-                messages: [userMessage],
+                messages: [systemMessage,userMessage],
                 date: new Date().toISOString(),
             }
         }else{
